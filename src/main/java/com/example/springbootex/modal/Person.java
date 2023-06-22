@@ -1,12 +1,18 @@
 package com.example.springbootex.modal;
 
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+@Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
+@SuperBuilder
+@AllArgsConstructor
 @Entity
 @Table(name = "person")
 public class Person {
-
-
+    @Id
     private long id;
     private String firstName;
     private String lastName;
