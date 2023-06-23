@@ -3,6 +3,7 @@ package com.example.springbootex.service;
 import com.example.springbootex.exception.ResourceNotFoundException;
 import com.example.springbootex.modal.Person;
 import com.example.springbootex.repo.PersonRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class PersonService {
     @Autowired

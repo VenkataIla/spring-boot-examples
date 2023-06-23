@@ -4,6 +4,7 @@ import com.example.springbootex.exception.ResourceNotFoundException;
 import com.example.springbootex.modal.Person;
 import com.example.springbootex.service.PersonService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 public class PersonController {
 
@@ -19,6 +21,7 @@ public class PersonController {
 
     @GetMapping("/persons")
     public List<Person> getAllPersons() {
+        log.info("start of the controller");
         return personService.getAllPersons();
     }
 
