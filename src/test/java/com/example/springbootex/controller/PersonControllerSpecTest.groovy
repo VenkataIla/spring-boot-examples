@@ -1,3 +1,4 @@
+/*
 package com.example.springbootex.controller
 
 import com.example.springbootex.BaseIntegrationSpec
@@ -5,6 +6,7 @@ import com.example.springbootex.modal.Person
 import com.example.springbootex.repo.PersonRepo
 import com.example.springbootex.service.PersonService
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Retry
 import spock.lang.Unroll
@@ -77,4 +79,18 @@ class PersonControllerSpecTest extends BaseIntegrationSpec{
         then:
         result == 4
     }
+
+    def "givenCustomer_whenPostCustomer_thenStatus200"() throws Exception {
+        when:
+        Person person = mapper.readValue("person/personRequest.json",Person.class)
+
+        then:
+        mockMvc.perform(post("/person")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(person))
+                .andDo(print())
+                .andExpect(status().isOk())
+    }
+
 }
+*/

@@ -25,7 +25,12 @@ public class CustomSpringBootFilter extends OncePerRequestFilter {
         log.info("Filter starts");
         response.setHeader("TRACE_ID",tracer.currentSpan().context().traceIdString());
          log.info("Filter ends");
-        filterChain.doFilter(request,response);
+         try {
+             filterChain.doFilter(request, response);
+         }catch (Exception e)
+         {
+             e.getMessage();
+         }
 
     }
 }

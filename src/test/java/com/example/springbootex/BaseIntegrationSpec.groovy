@@ -1,6 +1,7 @@
 package com.example.springbootex
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase
 import org.hamcrest.Matchers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -21,10 +22,10 @@ import org.springframework.web.context.WebApplicationContext
 import spock.lang.Specification
 
 @ContextConfiguration
+@SpringBootTest
 @AutoConfigureMockMvc
 @WebAppConfiguration
-@ActiveProfiles(profiles = "default")
-@SpringBootTest
+@AutoConfigureEmbeddedDatabase(beanName = "postgresDataSource", provider = AutoConfigureEmbeddedDatabase.DatabaseProvider.ZONKY)
 abstract class BaseIntegrationSpec extends Specification {
 
     @Autowired

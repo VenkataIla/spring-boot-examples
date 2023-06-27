@@ -1,6 +1,7 @@
 package com.example.springbootex.modal;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -9,26 +10,21 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = false)
 @SuperBuilder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "person")
 public class Person {
     @Id
     private long id;
+    @NotBlank(message = "First Name should not be blank")
     private String firstName;
+    @NotBlank(message = "Last Name should not be blank")
     private String lastName;
+
+    @NotBlank(message = "EmailId should not be blank")
     private String emailId;
 
-    public Person() {
-
-    }
-
-    public Person(String firstName, String lastName, String emailId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailId = emailId;
-    }
-
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {
         return id;

@@ -1,5 +1,6 @@
 package com.example.springbootex.service;
 
+import com.example.springbootex.exception.ConnectionException;
 import com.example.springbootex.exception.ResourceNotFoundException;
 import com.example.springbootex.modal.Person;
 import com.example.springbootex.repo.PersonRepo;
@@ -21,9 +22,14 @@ public class PersonService {
     public List< Person > getAllPersons() {
         return personRepo.findAll();
     }
-    public Optional<Person> getPersonById(Long employeeId)
+    public Person getPersonById(Long employeeId)
             throws ResourceNotFoundException {
-        return personRepo.findById(employeeId);
+        Optional<Person> person = personRepo.findById(employeeId);
+        if(person.isPresent())
+        {
+            return person.get();
+        }
+        return person.get();
     }
 
     public Person createPerson(Person employee) {
@@ -38,7 +44,12 @@ public class PersonService {
         employee.setEmailId(employeeDetails.getEmailId());
         employee.setLastName(employeeDetails.getLastName());
         employee.setFirstName(employeeDetails.getFirstName());
-        final Person updatedPerson = personRepo.save(employee);
+        Person updatedPerson = null;
+        try {
+            updatedPerson = personRepo.save(employee);
+        }catch (Exception e){
+            throw new ConnectionException(e.getMessage());
+        }
         return updatedPerson;
     }
 

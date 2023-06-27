@@ -4,15 +4,19 @@ import com.example.springbootex.exception.ResourceNotFoundException;
 import com.example.springbootex.modal.Person;
 import com.example.springbootex.service.PersonService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
+@EnableWebSecurity
+@RequiredArgsConstructor
 @RestController
 public class PersonController {
 
@@ -28,8 +32,7 @@ public class PersonController {
     @GetMapping("/persons/{id}")
     public ResponseEntity< Person > getPersonById(@PathVariable(value = "id") Long personId)
             throws ResourceNotFoundException {
-        Person person = personService.getPersonById(personId)
-                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id :: " + personId));
+        Person person = personService.getPersonById(personId);
         return ResponseEntity.ok().body(person);
     }
 
